@@ -1,0 +1,33 @@
+
+images.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+space_ship_left
+  rotate: false
+  xy: 1, 131
+  size: 256, 256
+  orig: 256, 256
+  offset: 0, 0
+  index: -1
+space_ship_normal
+  rotate: false
+  xy: 259, 131
+  size: 256, 256
+  orig: 256, 256
+  offset: 0, 0
+  index: -1
+space_ship_right
+  rotate: false
+  xy: 517, 131
+  size: 256, 256
+  orig: 256, 256
+  offset: 0, 0
+  index: -1
+space_rock
+  rotate: false
+  xy: 1, 1
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: -1
