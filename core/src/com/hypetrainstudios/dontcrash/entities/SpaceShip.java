@@ -24,7 +24,8 @@ public class SpaceShip extends Entity implements InputProcessor{
 	private float percent;
 	private float moveRate;
 	private float moveCounter;
-	private float yTarget;
+	private float yEnd;
+	private float yStart;
 	private boolean dodgeFinished;
 	public SpaceShip(){
 		this.image = new Sprite(AssetHandler.manager.get(AssetHandler.atlasImages).findRegion("space_ship_normal"));
@@ -48,32 +49,41 @@ public class SpaceShip extends Entity implements InputProcessor{
 		this.active = true;
 		
 		this.moveCounter = 0;
-		this.moveRate = 5f;
-		this.yTarget = centerPosition;
+		this.moveRate = .5f;
+		this.yEnd = centerPosition;
 		this.percent = 0;
 		this.dodgeFinished = true;
-		
-		strafeRight = new Animation(1f,
+		this.yStart = 0;
+		strafeRight = new Animation(.5f,
 						(AssetHandler.manager.get(AssetHandler.atlasImages).findRegion("space_ship_right")),
 						(AssetHandler.manager.get(AssetHandler.atlasImages).findRegion("space_ship_normal")));
-		strafeLeft = new Animation(1f,
+		strafeLeft = new Animation(.5f,
 				(AssetHandler.manager.get(AssetHandler.atlasImages).findRegion("space_ship_left")),
 				(AssetHandler.manager.get(AssetHandler.atlasImages).findRegion("space_ship_normal")));
 	}
 	
 	private void dodge(float delta){
-		percent = moveCounter/moveRate;
-		moveCounter+=delta;
-		this.y = this.y + (yTarget - this.y) * percent;
+		System.out.println("Move Counter : " + moveCounter + "\n Percent" + this.percent);
+		this.percent = this.moveCounter/this.moveRate;
+		this.moveCounter+=delta;
+		if(yStart >= yEnd) image.setRegion(strafeRight.getKeyFrame(moveCounter));
+		else if (yStart <= yEnd)  image.setRegion(strafeLeft.getKeyFrame(moveCounter));
+		this.y = this.yStart + (this.yEnd - this.yStart) * this.percent;
+		System.out.println("Y is " + this.y);
+		System.out.println("Y Target is " + this.yEnd);
 		this.image.setCenter(this.x, this.y);
-		if(moveCounter >= moveRate){
-			moveCounter = 0;
-			dodgeFinished = true;
+		
+		if(this.moveCounter >= this.moveRate){
+			this.moveCounter = 0;
+			this.percent = 0;
+			this.dodgeFinished = true;
 		}
+		
 	}
 	@Override
 	public void update(float delta){
 		move(delta);
+		
 		updateCounters(delta);
 		if(!dodgeFinished)dodge(delta);
 	}
@@ -97,17 +107,27 @@ public class SpaceShip extends Entity implements InputProcessor{
 	public void collisionWithSpaceRock(){
 	//	DontCrash.running = false;
 	}
+
+	/* 		Input Handling 		*/
+	
+	//PC
 	@Override
 	public boolean keyDown(int keycode) {
 		
 		if(keycode==Keys.W||keycode==Keys.A)
 		{
-			this.yTarget = topPosition;
-			dodgeFinished = false;
+			this.yStart = this.y;
+			this.yEnd = topPosition;
+			this.dodgeFinished = false;
+			
 		}
 		if(keycode==Keys.S||keycode==Keys.D)
 		{
-			this.yTarget = bottomPosition;
+			this.yStart = this.y;
+			if(this.y==topPosition){
+				System.out.println("it was at the top now its going to the bottom");
+			}
+			this.yEnd = bottomPosition;
 			dodgeFinished = false;
 		}
 		return false;
@@ -121,13 +141,17 @@ public class SpaceShip extends Entity implements InputProcessor{
 			fireCounter = 0;
 		}
 		else{
-			this.yTarget = centerPosition;
+			this.yStart = this.y;
+			this.yEnd = centerPosition;
 			moveCounter = 0;
+			dodgeFinished = false;
 		}
 		
 		return false;
 	}
 
+	
+	//Mobile
 	@Override
 	public boolean keyTyped(char character) {
 		
