@@ -8,7 +8,16 @@ public class SpaceRock extends Entity{
 		this.image = new Sprite(AssetHandler.manager.get(AssetHandler.atlasImages).findRegion("space_rock"));
 		this.x = x;
 		this.y = y;
+		this.active = true;
 		this.image.setCenter(this.x, this.y);
 		rectangleForCollision = this.image.getBoundingRectangle();
+	}
+	@Override
+	public void collisionWithProjectile(){
+		deactivate();
+	}
+	@Override
+	public void collisionWithSpaceShip(){
+		deactivate();
 	}
 }

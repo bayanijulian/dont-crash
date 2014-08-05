@@ -30,8 +30,13 @@ public class Entity {
 	public void deactivate(){
 		this.active = false;
 	}
-	/*	Collision Handling	*/
-	public void collisionWithFuel(){
+	public boolean isActive(){
+		return this.active;
+	}
+	public Rectangle getRectangle(){	return this.rectangleForCollision;	}
+	
+	/*		Collision Handling		*/
+	public void collisionWithProjectile(){
 		
 	}
 	public void collisionWithSpaceRock(){
@@ -40,4 +45,8 @@ public class Entity {
 	public void collisionWithSpaceShip(){
 		
 	}
+	public void collisionWithFuel(){
+		
+	}
+	
 }

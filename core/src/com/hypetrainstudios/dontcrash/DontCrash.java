@@ -10,6 +10,7 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.hyeptrainstudios.dontcrash.screens.GameScreen;
 import com.hypetrainstudios.dontcrash.handlers.AssetHandler;
+import com.hypetrainstudios.dontcrash.handlers.ChunkHandler;
 import com.hypetrainstudios.dontcrash.entities.Fuel;
 import com.hypetrainstudios.dontcrash.entities.Projectile;
 import com.hypetrainstudios.dontcrash.entities.SpaceRock;
@@ -24,7 +25,7 @@ public class DontCrash extends Game {
 	public static ArrayList<Fuel> fuel;
 	public static ArrayList<Projectile> projectiles;
 	public static SpaceShip spaceShip;
-	
+	public static boolean running;
 	@Override
 	public void create() {
 		//loads assets to a queue
@@ -33,6 +34,7 @@ public class DontCrash extends Game {
 		AssetHandler.manager.finishLoading();
 		//creates the main menu for the game
 		gameScreen = new GameScreen();
+		running = true;
 		init();
 		//sets screen to the main menu
 		setScreen(gameScreen);
@@ -48,8 +50,19 @@ public class DontCrash extends Game {
 		fuel = new ArrayList<Fuel>();
 		projectiles = new ArrayList<Projectile>();
 		spaceShip = new SpaceShip();
+		
+		ChunkHandler.init();
 	}
 	public static void createSpaceRock(float x, float y){
 		spaceRocks.add(new SpaceRock(x, y));
+	}
+	public static void createProjectile(float x, float y){
+		projectiles.add(new Projectile(x, y));
+	}
+	public static void reset(){
+		spaceRocks.clear();
+		fuel.clear();
+		projectiles.clear();
+		ChunkHandler.init();
 	}
 }

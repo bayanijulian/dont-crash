@@ -5,29 +5,36 @@ filter: Nearest,Nearest
 repeat: none
 space_ship_left
   rotate: false
-  xy: 1, 131
-  size: 256, 256
-  orig: 256, 256
+  xy: 1, 17
+  size: 175, 175
+  orig: 175, 175
   offset: 0, 0
   index: -1
 space_ship_normal
   rotate: false
-  xy: 259, 131
-  size: 256, 256
-  orig: 256, 256
+  xy: 178, 17
+  size: 175, 175
+  orig: 175, 175
   offset: 0, 0
   index: -1
 space_ship_right
   rotate: false
-  xy: 517, 131
-  size: 256, 256
-  orig: 256, 256
+  xy: 355, 17
+  size: 175, 175
+  orig: 175, 175
   offset: 0, 0
   index: -1
 space_rock
   rotate: false
-  xy: 1, 1
+  xy: 532, 64
   size: 128, 128
   orig: 128, 128
+  offset: 0, 0
+  index: -1
+projectile
+  rotate: false
+  xy: 1, 1
+  size: 64, 14
+  orig: 64, 14
   offset: 0, 0
   index: -1
