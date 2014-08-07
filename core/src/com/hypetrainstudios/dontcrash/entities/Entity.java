@@ -9,6 +9,7 @@ public class Entity {
 	protected Sprite image;
 	protected boolean active;
 	protected Rectangle rectangleForCollision;
+	
 	public Entity(){
 		this.x = 0;
 		this.y = 0;
@@ -25,7 +26,9 @@ public class Entity {
 	}
 	public Sprite getSprite(){	return this.image;	}
 	
-	public void update(float delta){}
+	public void update(float delta){
+		
+	}
 	
 	public void deactivate(){
 		this.active = false;
@@ -38,6 +41,9 @@ public class Entity {
 	/*		Collision Handling		*/
 	public void collisionWithProjectile(){
 		
+	}
+	public void updateCollisionBounds(){
+		rectangleForCollision = this.image.getBoundingRectangle();
 	}
 	public void collisionWithSpaceRock(){
 		

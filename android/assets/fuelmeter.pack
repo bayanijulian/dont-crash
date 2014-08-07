@@ -1,0 +1,225 @@
+
+fuelmeter.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+fuelmeter
+  rotate: false
+  xy: 1, 919
+  size: 700, 100
+  orig: 700, 100
+  offset: 0, 0
+  index: 0
+fuelmeter
+  rotate: false
+  xy: 1, 817
+  size: 700, 100
+  orig: 700, 100
+  offset: 0, 0
+  index: 1
+fuelmeter
+  rotate: false
+  xy: 1, 715
+  size: 700, 100
+  orig: 700, 100
+  offset: 0, 0
+  index: 2
+fuelmeter
+  rotate: false
+  xy: 1, 613
+  size: 700, 100
+  orig: 700, 100
+  offset: 0, 0
+  index: 3
+fuelmeter
+  rotate: false
+  xy: 1, 511
+  size: 700, 100
+  orig: 700, 100
+  offset: 0, 0
+  index: 4
+fuelmeter
+  rotate: false
+  xy: 1, 409
+  size: 700, 100
+  orig: 700, 100
+  offset: 0, 0
+  index: 5
+fuelmeter
+  rotate: false
+  xy: 1, 307
+  size: 700, 100
+  orig: 700, 100
+  offset: 0, 0
+  index: 6
+fuelmeter
+  rotate: false
+  xy: 1, 205
+  size: 700, 100
+  orig: 700, 100
+  offset: 0, 0
+  index: 7
+fuelmeter
+  rotate: false
+  xy: 1, 103
+  size: 700, 100
+  orig: 700, 100
+  offset: 0, 0
+  index: 8
+fuelmeter
+  rotate: false
+  xy: 1, 1
+  size: 700, 100
+  orig: 700, 100
+  offset: 0, 0
+  index: 9
+
+fuelmeter2.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+fuelmeter
+  rotate: false
+  xy: 1, 919
+  size: 700, 100
+  orig: 700, 100
+  offset: 0, 0
+  index: 10
+fuelmeter
+  rotate: false
+  xy: 1, 817
+  size: 700, 100
+  orig: 700, 100
+  offset: 0, 0
+  index: 11
+fuelmeter
+  rotate: false
+  xy: 1, 715
+  size: 700, 100
+  orig: 700, 100
+  offset: 0, 0
+  index: 12
+fuelmeter
+  rotate: false
+  xy: 1, 613
+  size: 700, 100
+  orig: 700, 100
+  offset: 0, 0
+  index: 13
+fuelmeter
+  rotate: false
+  xy: 1, 511
+  size: 700, 100
+  orig: 700, 100
+  offset: 0, 0
+  index: 14
+fuelmeter
+  rotate: false
+  xy: 1, 409
+  size: 700, 100
+  orig: 700, 100
+  offset: 0, 0
+  index: 15
+fuelmeter
+  rotate: false
+  xy: 1, 307
+  size: 700, 100
+  orig: 700, 100
+  offset: 0, 0
+  index: 16
+fuelmeter
+  rotate: false
+  xy: 1, 205
+  size: 700, 100
+  orig: 700, 100
+  offset: 0, 0
+  index: 17
+fuelmeter
+  rotate: false
+  xy: 1, 103
+  size: 700, 100
+  orig: 700, 100
+  offset: 0, 0
+  index: 18
+fuelmeter
+  rotate: false
+  xy: 1, 1
+  size: 700, 100
+  orig: 700, 100
+  offset: 0, 0
+  index: 19
+
+fuelmeter3.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+fuelmeter
+  rotate: false
+  xy: 1, 919
+  size: 700, 100
+  orig: 700, 100
+  offset: 0, 0
+  index: 20
+fuelmeter
+  rotate: false
+  xy: 1, 817
+  size: 700, 100
+  orig: 700, 100
+  offset: 0, 0
+  index: 21
+fuelmeter
+  rotate: false
+  xy: 1, 715
+  size: 700, 100
+  orig: 700, 100
+  offset: 0, 0
+  index: 22
+fuelmeter
+  rotate: false
+  xy: 1, 613
+  size: 700, 100
+  orig: 700, 100
+  offset: 0, 0
+  index: 23
+fuelmeter
+  rotate: false
+  xy: 1, 511
+  size: 700, 100
+  orig: 700, 100
+  offset: 0, 0
+  index: 24
+fuelmeter
+  rotate: false
+  xy: 1, 409
+  size: 700, 100
+  orig: 700, 100
+  offset: 0, 0
+  index: 25
+fuelmeter
+  rotate: false
+  xy: 1, 307
+  size: 700, 100
+  orig: 700, 100
+  offset: 0, 0
+  index: 26
+fuelmeter
+  rotate: false
+  xy: 1, 205
+  size: 700, 100
+  orig: 700, 100
+  offset: 0, 0
+  index: 27
+fuelmeter
+  rotate: false
+  xy: 1, 103
+  size: 700, 100
+  orig: 700, 100
+  offset: 0, 0
+  index: 28
+fuelmeter
+  rotate: false
+  xy: 1, 1
+  size: 700, 100
+  orig: 700, 100
+  offset: 0, 0
+  index: 29

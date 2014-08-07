@@ -4,7 +4,6 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.hypetrainstudios.dontcrash.DontCrash;
-import com.hypetrainstudios.dontcrash.handlers.ChunkHandler;
 import com.hypetrainstudios.dontcrash.handlers.LogicHandler;
 
 public class GameScreen implements Screen{
@@ -29,12 +28,14 @@ public class GameScreen implements Screen{
 		DontCrash.batch.begin();
 		
 		DontCrash.spaceShip.getSprite().draw(DontCrash.batch);
+		DontCrash.fuelMeter.getSprite().draw(DontCrash.batch);
 		
 		for(int i = 0; i<DontCrash.spaceRocks.size(); i ++)
 			DontCrash.spaceRocks.get(i).getSprite().draw(DontCrash.batch);
 		
 		for(int i = 0; i<DontCrash.projectiles.size(); i ++)
 			DontCrash.projectiles.get(i).getSprite().draw(DontCrash.batch);
+		
 		
 		DontCrash.batch.end();
 	}

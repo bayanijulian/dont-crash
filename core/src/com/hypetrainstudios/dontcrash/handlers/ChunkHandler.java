@@ -6,16 +6,20 @@ import com.badlogic.gdx.math.Rectangle;
 import com.hypetrainstudios.dontcrash.DontCrash;
 
 public class ChunkHandler {
-	public static float gapX = Gdx.graphics.getWidth()/2;
-	public static int waveCounter = 0;
-	public static int chunkCounter = 0;
-	public static final float centerPosition = Gdx.graphics.getHeight() * (3/6f);
-	public static final float topPosition = Gdx.graphics.getHeight() * (5/6f);
-	public static final float bottomPosition = Gdx.graphics.getHeight() * (1/6f);
-	public static Rectangle rectangleForGenerationOfNewChunk = new Rectangle();
-	public static Rectangle rectangleForRemovalOfOldChunk = new Rectangle();
+	private static float gapX = Gdx.graphics.getWidth()/2;
+	private static int waveCounter = 0;
+	private static int chunkCounter = 0;
+	private static final float centerPosition = Gdx.graphics.getHeight() * (3/6f);
+	private static final float topPosition = Gdx.graphics.getHeight() * (5/6f);
+	private static final float bottomPosition = Gdx.graphics.getHeight() * (1/6f);
+	private static Rectangle rectangleForGenerationOfNewChunk = new Rectangle();
+	private static Rectangle rectangleForRemovalOfOldChunk = new Rectangle();
 	
 	public static void init(){
+		
+		chunkCounter=0;
+		waveCounter= 0;
+		
 		createChunk();
 		chunkCounter++;
 		rectangleForRemovalOfOldChunk.set((gapX * ((chunkCounter*10)-5)), 0, (Gdx.graphics.getWidth()*.1f), (Gdx.graphics.getHeight()));
@@ -28,11 +32,13 @@ public class ChunkHandler {
 			createChunk();
 		}
 		if(DontCrash.spaceShip.getRectangle().overlaps(rectangleForRemovalOfOldChunk)){
+			//destroyChunk();
+			DontCrash.spaceShip.increaseSpeed();
 			rectangleForRemovalOfOldChunk.set((gapX * ((chunkCounter*10)-5)), 0, (Gdx.graphics.getWidth()*.1f), (Gdx.graphics.getHeight()));
 		}
 	}
 	public static void destroyChunk(){
-		for(int i = 0; i < DontCrash.spaceRocks.size(); i ++){
+		for(int i = 0; i < 10; i ++){
 			DontCrash.spaceRocks.get(i).deactivate();
 		}
 	}

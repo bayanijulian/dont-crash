@@ -12,7 +12,7 @@ public class Projectile extends Entity{
 		this.y = y;
 		this.image.setCenter(this.x, this.y);
 		this.active = true;
-		this.speed = 1000f;
+		this.speed = 2000f;
 		this.rectangleForCollision = this.image.getBoundingRectangle();
 	}
 	@Override
@@ -22,7 +22,7 @@ public class Projectile extends Entity{
 	private void move(float delta){
 		this.x += speed * delta;
 		this.image.setX(this.x);
-		this.rectangleForCollision = this.image.getBoundingRectangle();
+		updateCollisionBounds();
 	}
 	public void collisionWithSpaceRock(){
 		deactivate();

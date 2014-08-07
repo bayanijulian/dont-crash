@@ -12,6 +12,7 @@ import com.hyeptrainstudios.dontcrash.screens.GameScreen;
 import com.hypetrainstudios.dontcrash.handlers.AssetHandler;
 import com.hypetrainstudios.dontcrash.handlers.ChunkHandler;
 import com.hypetrainstudios.dontcrash.entities.Fuel;
+import com.hypetrainstudios.dontcrash.entities.FuelMeter;
 import com.hypetrainstudios.dontcrash.entities.Projectile;
 import com.hypetrainstudios.dontcrash.entities.SpaceRock;
 import com.hypetrainstudios.dontcrash.entities.SpaceShip;
@@ -26,6 +27,7 @@ public class DontCrash extends Game {
 	public static ArrayList<Projectile> projectiles;
 	public static SpaceShip spaceShip;
 	public static boolean running;
+	public static FuelMeter fuelMeter;
 	@Override
 	public void create() {
 		//loads assets to a queue
@@ -50,7 +52,7 @@ public class DontCrash extends Game {
 		fuel = new ArrayList<Fuel>();
 		projectiles = new ArrayList<Projectile>();
 		spaceShip = new SpaceShip();
-		
+		fuelMeter = new FuelMeter();
 		ChunkHandler.init();
 	}
 	public static void createSpaceRock(float x, float y){
@@ -64,5 +66,8 @@ public class DontCrash extends Game {
 		fuel.clear();
 		projectiles.clear();
 		ChunkHandler.init();
+		spaceShip = new SpaceShip();
+		fuelMeter = new FuelMeter();
+		
 	}
 }
