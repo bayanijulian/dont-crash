@@ -18,8 +18,6 @@ public class SpaceShip extends Entity implements InputProcessor{
 	private float fireRate;
 	private float fireCounter;
 	
-	
-	
 	/* Used for Dodge Method */
 	private float percent;
 	private float dodgeRate;
@@ -36,8 +34,6 @@ public class SpaceShip extends Entity implements InputProcessor{
 	private float distanceTraveled;
 	public SpaceShip(){
 		this.image = new Sprite(AssetHandler.manager.get(AssetHandler.atlasImages).findRegion("space_ship_normal"));
-		
-		
 		
 		/* Positions */
 		this.centerPosition = Gdx.graphics.getHeight() * (3/6f);
@@ -60,8 +56,8 @@ public class SpaceShip extends Entity implements InputProcessor{
 		this.fireCounter = 1.5f;
 		
 		
-		this.dodgeCounter = .75f;
-		this.dodgeRate = 1.5f;
+		this.dodgeCounter = .25f;
+		this.dodgeRate = .5f;
 		
 		this.dodgeStart = bottomPosition;
 		this.dodgeEnd = topPosition;
@@ -69,8 +65,8 @@ public class SpaceShip extends Entity implements InputProcessor{
 		this.dodgeFinished = true;
 		
 		
-		this.dodgeTimeMiddle = .75f;
-		this.dodgeTimeTop = 1.5f;
+		this.dodgeTimeMiddle = .25f;
+		this.dodgeTimeTop = .5f;
 		this.dodgeTimeBottom = 0;
 		
 		this.dodgeTimeTemp = this.dodgeTimeMiddle;
@@ -78,7 +74,7 @@ public class SpaceShip extends Entity implements InputProcessor{
 		
 		this.currentInput = -1;
 		
-		increaseDodgeRate(1f);
+		//increaseDodgeRate(1f);
 		
 		
 	}
@@ -132,7 +128,6 @@ public class SpaceShip extends Entity implements InputProcessor{
 		this.dodgeTimeMiddle = newRate/2f;
 		this.dodgeTimeTop = newRate;
 	}
-	
 	private void updateCamera(){
 		DontCrash.cam.position.x = (this.x) + (.4f*Gdx.graphics.getWidth());
 		DontCrash.cam.update();
@@ -187,6 +182,10 @@ public class SpaceShip extends Entity implements InputProcessor{
 	}
 	@Override
 	public boolean keyUp(int keycode) {
+		if(fireCounter>=fireRate&&dodgeFinished&&keycode==Keys.SPACE){
+			DontCrash.createProjectile(this.x + 50, this.y);
+			fireCounter = 0;
+		}
 		if(keycode==Keys.W||keycode==Keys.S){
 		
 		if(currentInput==Keys.W||currentInput==Keys.A){
@@ -219,12 +218,7 @@ public class SpaceShip extends Entity implements InputProcessor{
 
 	@Override
 	public boolean touchUp(int screenX, int screenY, int pointer, int button) {
-		if(fireCounter>=fireRate&&dodgeFinished){
-			DontCrash.createProjectile(this.x + 50, this.y);
-			fireCounter = 0;
-		}
-		if(button==Buttons.RIGHT)
-			DontCrash.reset();
+		
 		return false;
 	}
 

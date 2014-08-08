@@ -6,7 +6,7 @@ import com.badlogic.gdx.math.Rectangle;
 import com.hypetrainstudios.dontcrash.DontCrash;
 
 public class ChunkHandler {
-	private static float gapX = Gdx.graphics.getWidth()/2;
+	private static float gapX = Gdx.graphics.getWidth()*.6f ;
 	private static int waveCounter = 0;
 	private static int chunkCounter = 0;
 	private static final float centerPosition = Gdx.graphics.getHeight() * (3/6f);
@@ -44,8 +44,22 @@ public class ChunkHandler {
 	}
 	public static void createChunk(){
 		for(int i = 0; i<10; i++){
+			
 			waveCounter++;
 			int numberOfRocksPerWave = MathUtils.random(1, 3);
+			
+			if(i==7){
+				int rdm = MathUtils.random(2);
+				if(rdm==0){
+					DontCrash.createFuel((gapX * waveCounter)-(Gdx.graphics.getWidth()*.1f),topPosition);
+				}
+				else if(rdm==1){
+					DontCrash.createFuel((gapX * waveCounter)-(Gdx.graphics.getWidth()*.1f),centerPosition);
+				}
+				else{
+					DontCrash.createFuel((gapX * waveCounter)-(Gdx.graphics.getWidth()*.1f),bottomPosition);
+				}
+			}
 			if(numberOfRocksPerWave==3){
 				DontCrash.createSpaceRock((gapX * waveCounter),topPosition);
 				DontCrash.createSpaceRock((gapX * waveCounter),centerPosition);

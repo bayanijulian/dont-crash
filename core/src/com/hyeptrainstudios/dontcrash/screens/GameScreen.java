@@ -36,6 +36,8 @@ public class GameScreen implements Screen{
 		for(int i = 0; i<DontCrash.projectiles.size(); i ++)
 			DontCrash.projectiles.get(i).getSprite().draw(DontCrash.batch);
 		
+		for(int i = 0; i<DontCrash.fuel.size(); i ++)
+			DontCrash.fuel.get(i).getSprite().draw(DontCrash.batch);
 		
 		DontCrash.batch.end();
 	}

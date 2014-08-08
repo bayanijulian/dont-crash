@@ -24,9 +24,16 @@ space_ship_right
   orig: 175, 175
   offset: 0, 0
   index: -1
-space_rock
+fuelcan
   rotate: false
   xy: 532, 64
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: -1
+space_rock
+  rotate: false
+  xy: 662, 64
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
