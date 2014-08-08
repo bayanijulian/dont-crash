@@ -1,13 +1,19 @@
 package com.hyeptrainstudios.dontcrash.screens;
 
+import java.text.DecimalFormat;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.hypetrainstudios.dontcrash.DontCrash;
 import com.hypetrainstudios.dontcrash.handlers.LogicHandler;
 
 public class GameScreen implements Screen{
 	
+	private BitmapFont font;
+	private float time;
+	private DecimalFormat df;
 	@Override
 	public void render(float delta) {
 		clearScreen();
@@ -21,6 +27,7 @@ public class GameScreen implements Screen{
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 	}
 	public void update(float delta){
+		time+=delta;
 		LogicHandler.update(delta);
 	}
 	public void draw(){
@@ -39,6 +46,8 @@ public class GameScreen implements Screen{
 		for(int i = 0; i<DontCrash.fuel.size(); i ++)
 			DontCrash.fuel.get(i).getSprite().draw(DontCrash.batch);
 		
+		font.draw(DontCrash.batch, df.format((double)(time)), DontCrash.spaceShip.getSprite().getX(), 75);
+		
 		DontCrash.batch.end();
 	}
 	@Override
@@ -48,9 +57,10 @@ public class GameScreen implements Screen{
 
 	@Override
 	public void show() {
-		
+		font = new BitmapFont(Gdx.files.internal("audiowide.fnt"));
 		Gdx.input.setInputProcessor(DontCrash.spaceShip);
-		
+		df = new DecimalFormat("000");
+		time = 0;
 	}
 
 	@Override

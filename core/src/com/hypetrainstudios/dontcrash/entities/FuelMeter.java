@@ -29,7 +29,7 @@ public class FuelMeter extends Entity {
 	public void updateProgress(float fuelPercentage){
 		this.image.setRegion(fuelAnimation.getKeyFrame(fuelPercentage));
 		if(fuelAnimation.isAnimationFinished(fuelPercentage)){
-			DontCrash.running = false;
+			DontCrash.endGame();
 		}
 	}
 }

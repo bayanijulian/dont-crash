@@ -1,7 +1,6 @@
 package com.hypetrainstudios.dontcrash.entities;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input.Buttons;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.g2d.Sprite;
@@ -32,6 +31,8 @@ public class SpaceShip extends Entity implements InputProcessor{
 	private float dodgeTimeTemp;
 	private int currentInput;
 	private float distanceTraveled;
+	private int currentTouchX;
+	private int currentTouchY;
 	public SpaceShip(){
 		this.image = new Sprite(AssetHandler.manager.get(AssetHandler.atlasImages).findRegion("space_ship_normal"));
 		
@@ -73,7 +74,8 @@ public class SpaceShip extends Entity implements InputProcessor{
 		this.dodgeDirection = 1;
 		
 		this.currentInput = -1;
-		
+		this.currentTouchX = -1;
+		this.currentTouchY = -1;
 		//increaseDodgeRate(1f);
 		
 		
@@ -82,17 +84,14 @@ public class SpaceShip extends Entity implements InputProcessor{
 	private void dodge(float delta){
 		this.percent = this.dodgeCounter/this.dodgeRate;
 		this.dodgeCounter = this.dodgeCounter + (dodgeDirection * delta);
-		
 		this.y = this.dodgeStart + (this.dodgeEnd - this.dodgeStart) * this.percent;
 		this.image.setCenter(this.x, this.y);
-		System.out.println("currently dodging y is : " + this.y + "\tpercent is : " + this.percent);
 		if(MathUtils.isEqual(dodgeCounter, dodgeTimeMiddle, .12f))	image.setRegion(AssetHandler.manager.get(AssetHandler.atlasImages).findRegion("space_ship_normal"));
 		else if(dodgeDirection==-1)	image.setRegion(AssetHandler.manager.get(AssetHandler.atlasImages).findRegion("space_ship_right"));
 		else if(dodgeDirection==1)	image.setRegion(AssetHandler.manager.get(AssetHandler.atlasImages).findRegion("space_ship_left"));
 		
 		if(MathUtils.isEqual(dodgeCounter, dodgeTimeTemp, .01f)){
 			dodgeFinished = true;
-			System.out.println("dodgecounter and dodgetimetemp are equal within .05f   :" +  dodgeCounter + " : " + dodgeTimeTemp);
 		}
 		
 		
@@ -111,7 +110,7 @@ public class SpaceShip extends Entity implements InputProcessor{
 	private void move(float delta){
 		this.x+= speed * delta;
 		this.distanceTraveled+= speed*delta;
-		DontCrash.fuelMeter.updateProgress(distanceTraveled/10000f);
+		DontCrash.fuelMeter.updateProgress(distanceTraveled/15000f);
 		this.image.setCenter(this.x, this.y);
 		this.updateCollisionBounds();
 		this.updateCamera();
@@ -134,7 +133,7 @@ public class SpaceShip extends Entity implements InputProcessor{
 	}
 	@Override
 	public void collisionWithSpaceRock(){
-		DontCrash.running = false;
+		DontCrash.endGame();
 	}
 
 	/* 		Input Handling 		*/
@@ -168,12 +167,12 @@ public class SpaceShip extends Entity implements InputProcessor{
 	}
 	@Override
 	public boolean keyDown(int keycode) {
-		if(keycode==Keys.W||keycode==Keys.S){
+		if(keycode==Keys.W||keycode==Keys.S||keycode==Keys.UP||keycode==Keys.DOWN){
 			currentInput = keycode;
-			if(currentInput==Keys.W)
+			if(currentInput==Keys.W||currentInput==Keys.UP)
 				this.goingUp(false);
 				
-			if(currentInput==Keys.S)
+			if(currentInput==Keys.S||currentInput==Keys.DOWN)
 				this.goingDown(false);
 		}
 		
@@ -186,20 +185,20 @@ public class SpaceShip extends Entity implements InputProcessor{
 			DontCrash.createProjectile(this.x + 50, this.y);
 			fireCounter = 0;
 		}
-		if(keycode==Keys.W||keycode==Keys.S){
+		if(keycode==Keys.W||keycode==Keys.S||keycode==Keys.UP||keycode==Keys.DOWN){
 		
-		if(currentInput==Keys.W||currentInput==Keys.A){
-			if(this.y>=this.centerPosition)	this.goingDown(true);
-			if(this.y<this.centerPosition)	this.goingUp(true);
-			currentInput = -1;
+			if(currentInput==Keys.W||currentInput==Keys.UP){
+				if(this.y>=this.centerPosition)	this.goingDown(true);
+				if(this.y<this.centerPosition)	this.goingUp(true);
+				currentInput = -1;
+			}
+			if(currentInput==Keys.S||currentInput==Keys.DOWN){
+				if(this.y>=this.centerPosition)	this.goingDown(true);
+				if(this.y<this.centerPosition)	this.goingUp(true);
+				currentInput = -1;
+			}
 		}
-		if(currentInput==Keys.S||currentInput==Keys.D){
-			if(this.y>=this.centerPosition)	this.goingDown(true);
-			if(this.y<this.centerPosition)	this.goingUp(true);
-			currentInput = -1;
-		}
-		}
-		return false;
+		  return false;
 	}
 
 	
@@ -213,11 +212,54 @@ public class SpaceShip extends Entity implements InputProcessor{
 	@Override
 	public boolean touchDown(int screenX, int screenY, int pointer, int button) {
 		
+		if((screenX<=Gdx.graphics.getWidth()*.2f&&screenY<=Gdx.graphics.getHeight()*.5f)||(screenX<=Gdx.graphics.getWidth()*.2f&&screenY>Gdx.graphics.getHeight()*.5f)){
+			this.currentTouchX = screenX;
+			this.currentTouchY = screenY;
+			
+			//left hand side of screen and the lower box
+			if(currentTouchX<=Gdx.graphics.getWidth()*.2f&&currentTouchY>=Gdx.graphics.getHeight()*.5f&&currentTouchX>0){
+				this.goingDown(false);
+			}
+			//left hand side of screen and the upper box
+			if(currentTouchX<=Gdx.graphics.getWidth()*.2f&&currentTouchY<Gdx.graphics.getHeight()*.5f&&currentTouchX>0){
+				this.goingUp(false);
+			}
+		}
+		
+		
+		
+		
 		return false;
 	}
 
 	@Override
 	public boolean touchUp(int screenX, int screenY, int pointer, int button) {
+		
+		if(screenX>Gdx.graphics.getWidth()*.2f&&fireCounter>=fireRate&&dodgeFinished){
+			DontCrash.createProjectile(this.x + 50, this.y);
+			fireCounter = 0;
+		}
+		
+		if((screenX<=Gdx.graphics.getWidth()*.2f&&screenY<=Gdx.graphics.getHeight()*.5f)||(screenX<=Gdx.graphics.getWidth()*.2f&&screenY>Gdx.graphics.getHeight()*.5f)){
+
+			
+			//left hand side of screen and the lower box
+			if(currentTouchX<=Gdx.graphics.getWidth()*.2f&&currentTouchY>=Gdx.graphics.getHeight()*.5f&&currentTouchX>0){
+				if(this.y>=this.centerPosition)	this.goingDown(true);
+				if(this.y<this.centerPosition)	this.goingUp(true);
+				this.currentTouchX = -1;
+				this.currentTouchY = -1;
+			}
+			//left hand side of screen and the upper box
+			if(currentTouchX<=Gdx.graphics.getWidth()*.2f&&currentTouchY<Gdx.graphics.getHeight()*.5f&&currentTouchX>0){
+				if(this.y>=this.centerPosition)	this.goingDown(true);
+				if(this.y<this.centerPosition)	this.goingUp(true);
+				this.currentTouchX = -1;
+				this.currentTouchY = -1;
+			}
+		}
+		
+		
 		
 		return false;
 	}

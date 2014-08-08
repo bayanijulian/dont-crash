@@ -64,6 +64,9 @@ public class DontCrash extends Game {
 	public static void createFuel(float x, float y){
 		fuel.add(new Fuel(x, y));
 	}
+	public static void endGame(){
+		System.exit(0);
+	}
 	public static void reset(){
 		spaceRocks.clear();
 		fuel.clear();
