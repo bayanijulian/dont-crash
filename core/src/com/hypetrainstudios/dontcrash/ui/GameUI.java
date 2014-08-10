@@ -6,19 +6,21 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.Button.ButtonStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
+import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.hypetrainstudios.dontcrash.DontCrash;
 import com.hypetrainstudios.dontcrash.handlers.AssetHandler;
 
 public class GameUI {
-	private static Stage stage;
+	public static Stage stage;
 	private static FitViewport view;
 	
 	private static LabelStyle mainLblStyle;
@@ -27,7 +29,10 @@ public class GameUI {
 	private static ButtonStyle pauseBtnStyle;
 	private static Button pauseBtn;
 	
+	private static Listener listener;
+	
 	private static Animation fuelMeterAnimation;
+	
 	private static Image fuelMeterImg;
 	
 	private static BitmapFont audiowideFont;
@@ -36,21 +41,35 @@ public class GameUI {
 	
 	public static void init(){
 		view = new FitViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-		stage = new Stage(view);
-		
+		stage = new Stage(view,DontCrash.batch);
+		listener = new Listener();
 		df = new DecimalFormat("00");
 		
 		createFonts();
 		createAnimations();
 		createImages();
 		createLabels();
+		createButtons();
 		addActors();
 	}
 	
-	public static void createGameUI(){
-		init();
-	}
+	
+	
 	public static void createButtons(){
+		/*		Styles		*/
+		pauseBtnStyle = new ButtonStyle(
+				new TextureRegionDrawable(AssetHandler.manager.get(AssetHandler.atlasImages).findRegion("pauseBtnNormal")), //UP
+				new TextureRegionDrawable(AssetHandler.manager.get(AssetHandler.atlasImages).findRegion("pauseBtnPressed")),//DOWN
+				new TextureRegionDrawable(AssetHandler.manager.get(AssetHandler.atlasImages).findRegion("pauseBtnNormal")));//CHECKED
+		
+		/*		Buttons		*/
+		pauseBtn = new Button(pauseBtnStyle);
+		
+		/*		Positions		*/
+		pauseBtn.setPosition(Gdx.graphics.getWidth()-pauseBtn.getWidth(), Gdx.graphics.getHeight()-pauseBtn.getHeight());
+		
+		/*		Listeners		*/
+		pauseBtn.addListener(listener);
 		
 	}
 	public static void createImages(){
@@ -74,23 +93,20 @@ public class GameUI {
 	}
 	public static void addActors(){
 		stage.addActor(fuelMeterImg);
-	//	stage.addActor(pauseBtn);
+		stage.addActor(pauseBtn);
 		stage.addActor(timeLbl);
 	}
 	public static void update(float delta){
 		stage.act();
-		stage.draw();
+		
 		DontCrash.gameTime+=delta;
 		timeLbl.setText(""+df.format((double)(DontCrash.gameTime)));
-		//updatePositions(delta);
 	}
 	
-	public static void updatePositions(float delta){
-		
-		fuelMeterImg.setCenterPosition(
-				fuelMeterImg.getX()+DontCrash.spaceShip.getSpeed() * delta, 
-				fuelMeterImg.getY());
+	public static void draw(){
+		stage.draw();
 	}
+	
 	
 	public static void updateProgressOnFuelMeter(float fuelPercentage){
 		fuelMeterImg.setDrawable(new TextureRegionDrawable(fuelMeterAnimation.getKeyFrame(fuelPercentage)));
@@ -102,4 +118,16 @@ public class GameUI {
 	public static void dispose(){
 		stage.dispose();
 	}
+	private static class Listener extends ChangeListener{
+		@Override
+		public void changed(ChangeEvent event, Actor actor) {
+			if(actor==pauseBtn){
+				if(DontCrash.running)	DontCrash.running = false;
+				else DontCrash.running = true;
+			}
+			
+		}
+	}
+	
 }
+

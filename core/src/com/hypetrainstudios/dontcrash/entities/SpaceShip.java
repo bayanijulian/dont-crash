@@ -104,14 +104,18 @@ public class SpaceShip extends Entity implements InputProcessor{
 	private void dodge(float delta){
 		this.dodgePercent = this.dodgeCounter/this.dodgeRate;
 		this.dodgeCounter = this.dodgeCounter + (this.dodgeDirection * delta);
-		this.y = this.dodgeStart + (this.dodgeEnd - this.dodgeStart) * this.dodgePercent;
+		
+		this.y = MathUtils.lerp(this.dodgeStart, this.dodgeEnd, dodgePercent);
 		this.image.setCenter(this.x, this.y);
-		if(MathUtils.isEqual(dodgeCounter, dodgeTimeMiddle, .12f))	
+		
+		
+		if(MathUtils.isEqual(dodgeCounter, dodgeTimeMiddle, .005f))	
 			this.image.setRegion(AssetHandler.manager.get(AssetHandler.atlasImages).findRegion("space_ship_normal"));
 		else if(dodgeDirection==-1)	
 			this.image.setRegion(AssetHandler.manager.get(AssetHandler.atlasImages).findRegion("space_ship_right"));
 		else if(dodgeDirection==1)	
 			this.image.setRegion(AssetHandler.manager.get(AssetHandler.atlasImages).findRegion("space_ship_left"));
+		
 		
 		if(MathUtils.isEqual(dodgeCounter, dodgeTimeTemp, .01f))	dodgeFinished = true;
 	}

@@ -1,19 +1,17 @@
 package com.hyeptrainstudios.dontcrash.screens;
 
-import java.text.DecimalFormat;
-
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.hypetrainstudios.dontcrash.DontCrash;
 import com.hypetrainstudios.dontcrash.handlers.ChunkHandler;
 import com.hypetrainstudios.dontcrash.handlers.EntityHandler;
 import com.hypetrainstudios.dontcrash.ui.GameUI;
 
-
 public class GameScreen implements Screen{
+	
+	private static InputMultiplexer inputListener;
 	
 	@Override
 	public void render(float delta) {
@@ -30,10 +28,12 @@ public class GameScreen implements Screen{
 	}
 	
 	public void update(float delta){
+		
 		/* Handlers Updating */
 		ChunkHandler.update();
 		EntityHandler.update(delta);
 		
+		/* User Interface */
 		GameUI.update(delta);
 	}
 	
@@ -42,7 +42,6 @@ public class GameScreen implements Screen{
 		DontCrash.batch.begin();
 		
 		DontCrash.spaceShip.getSprite().draw(DontCrash.batch);
-		//DontCrash.fuelMeter.getSprite().draw(DontCrash.batch);
 		
 		for(int i = 0; i<DontCrash.spaceRocks.size(); i ++)
 			DontCrash.spaceRocks.get(i).getSprite().draw(DontCrash.batch);
@@ -54,6 +53,8 @@ public class GameScreen implements Screen{
 			DontCrash.fuel.get(i).getSprite().draw(DontCrash.batch);
 		
 		DontCrash.batch.end();
+		
+		GameUI.draw();
 	}
 	@Override
 	public void resize(int width, int height) {
@@ -62,7 +63,9 @@ public class GameScreen implements Screen{
 
 	@Override
 	public void show() {
-		Gdx.input.setInputProcessor(DontCrash.spaceShip);
+		inputListener = new InputMultiplexer(GameUI.stage,DontCrash.spaceShip);
+		
+		Gdx.input.setInputProcessor(inputListener);
 	}
 
 	@Override

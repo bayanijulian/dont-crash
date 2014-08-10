@@ -13,7 +13,6 @@ public class EntityHandler {
 	
 	public static void updateEntities(float delta){
 		/* Entities Updating */
-		DontCrash.fuelMeter.update(delta);
 		DontCrash.spaceShip.update(delta);
 		
 		for(int i = 0; i < DontCrash.projectiles.size(); i++)

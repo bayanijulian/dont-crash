@@ -13,7 +13,6 @@ import com.hypetrainstudios.dontcrash.handlers.AssetHandler;
 import com.hypetrainstudios.dontcrash.handlers.ChunkHandler;
 import com.hypetrainstudios.dontcrash.ui.GameUI;
 import com.hypetrainstudios.dontcrash.entities.Fuel;
-import com.hypetrainstudios.dontcrash.entities.FuelMeter;
 import com.hypetrainstudios.dontcrash.entities.Projectile;
 import com.hypetrainstudios.dontcrash.entities.SpaceRock;
 import com.hypetrainstudios.dontcrash.entities.SpaceShip;
@@ -28,7 +27,7 @@ public class DontCrash extends Game {
 	public static ArrayList<Projectile> projectiles;
 	public static SpaceShip spaceShip;
 	public static boolean running;
-	public static FuelMeter fuelMeter;
+	
 	public static float gameTime;
 	@Override
 	public void create() {
@@ -56,7 +55,7 @@ public class DontCrash extends Game {
 		fuel = new ArrayList<Fuel>();
 		projectiles = new ArrayList<Projectile>();
 		spaceShip = new SpaceShip();
-		fuelMeter = new FuelMeter();
+		
 		ChunkHandler.init();
 		GameUI.init();
 	}
@@ -82,7 +81,7 @@ public class DontCrash extends Game {
 		ChunkHandler.init();
 		
 		spaceShip.reset();
-		fuelMeter.reset();
+		
 		
 		//GameScreen.time = 0;
 		
