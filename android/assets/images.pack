@@ -45,3 +45,17 @@ projectile
   orig: 64, 14
   offset: 0, 0
   index: -1
+pauseBtnNormal
+  rotate: false
+  xy: 532, 30
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+pauseBtnPressed
+  rotate: false
+  xy: 792, 160
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1

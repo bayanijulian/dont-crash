@@ -6,7 +6,7 @@ import com.badlogic.gdx.math.Rectangle;
 import com.hypetrainstudios.dontcrash.DontCrash;
 
 public class ChunkHandler {
-	private static float gapX = Gdx.graphics.getWidth()*.6f ;
+	private static float gapX = Gdx.graphics.getWidth()*.8f ;
 	private static int waveCounter = 0;
 	private static int chunkCounter = 0;
 	private static final float centerPosition = Gdx.graphics.getHeight() * (3/6f);
@@ -32,25 +32,30 @@ public class ChunkHandler {
 			createChunk();
 		}
 		if(DontCrash.spaceShip.getRectangle().overlaps(rectangleForRemovalOfOldChunk)){
-			//destroyChunk();
+//			System.out.println("Number of Space Rocks : " + DontCrash.spaceRocks.size());
+//			//destroyChunk();
+//			System.out.println("Number of Space Rocks : " + DontCrash.spaceRocks.size());
 			DontCrash.spaceShip.increaseSpeed();
 			rectangleForRemovalOfOldChunk.set((gapX * ((chunkCounter*10)-5)), 0, (Gdx.graphics.getWidth()*.1f), (Gdx.graphics.getHeight()));
 		}
-	}
+	} 
 	public static void destroyChunk(){
 		for(int i = 0; i < 10; i ++){
-			DontCrash.spaceRocks.get(i).deactivate();
+			DontCrash.spaceRocks.remove(0);
 		}
 	}
 	public static void createChunk(){
 		for(int i = 0; i<10; i++){
 			
 			waveCounter++;
-			int numberOfRocksPerWave = MathUtils.random(1, 3);
+			int numberOfRocksPerWave = MathUtils.random(1, 2);
+			int rdmIFor3Rocks = MathUtils.random(0, 9);
+			
+			if(i==rdmIFor3Rocks) numberOfRocksPerWave  = 3;
 			
 			if(i==7){
 				int rdm = MathUtils.random(2);
-				if(rdm==0){
+				if(rdm==0){   
 					DontCrash.createFuel((gapX * waveCounter)-(Gdx.graphics.getWidth()*.1f),topPosition);
 				}
 				else if(rdm==1){
@@ -60,6 +65,7 @@ public class ChunkHandler {
 					DontCrash.createFuel((gapX * waveCounter)-(Gdx.graphics.getWidth()*.1f),bottomPosition);
 				}
 			}
+			
 			if(numberOfRocksPerWave==3){
 				DontCrash.createSpaceRock((gapX * waveCounter),topPosition);
 				DontCrash.createSpaceRock((gapX * waveCounter),centerPosition);

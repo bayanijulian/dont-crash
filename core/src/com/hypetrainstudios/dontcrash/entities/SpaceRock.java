@@ -10,7 +10,7 @@ public class SpaceRock extends Entity{
 		this.y = y;
 		this.active = true;
 		this.image.setCenter(this.x, this.y);
-		rectangleForCollision = this.image.getBoundingRectangle();
+		updateCollisionBounds();
 	}
 	@Override
 	public void collisionWithProjectile(){

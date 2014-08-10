@@ -11,7 +11,7 @@ public class Fuel extends Entity{
 		this.y = y;
 		this.image.setCenter(this.x, this.y);
 		this.active = true;
-		this.rectangleForCollision = this.image.getBoundingRectangle();
+		updateCollisionBounds();
 	}
 	@Override
 	public void collisionWithSpaceShip(){

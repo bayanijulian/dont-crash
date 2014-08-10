@@ -11,13 +11,13 @@ public class FuelMeter extends Entity {
 	private Animation fuelAnimation;
 	
 	public FuelMeter(){
-		this.image = new Sprite(AssetHandler.manager.get(AssetHandler.atlasFuelMeter).findRegion("fuelmeter"));
+		this.image = new Sprite();
 		this.image.setSize(700, 50);
-		this.x = Gdx.graphics.getWidth()/2-(.1f*Gdx.graphics.getWidth());
+		this.x = (Gdx.graphics.getWidth()/2-(.1f*Gdx.graphics.getWidth())-2500);
 		this.y = this.image.getHeight()/2;
 		this.image.setCenter(this.x, this.y);
-		this.fuelAnimation = new Animation(1/30f, AssetHandler.manager.get(AssetHandler.atlasFuelMeter).findRegions("fuelmeter"));
-		this.active = true;
+		//this.fuelAnimation = 
+		//this.active = true;
 		this.rectangleForCollision = null;
 	}
 	
@@ -26,10 +26,12 @@ public class FuelMeter extends Entity {
 		this.x+= DontCrash.spaceShip.getSpeed() * delta;
 		this.image.setCenter(this.x, this.y);
 	}
-	public void updateProgress(float fuelPercentage){
-		this.image.setRegion(fuelAnimation.getKeyFrame(fuelPercentage));
-		if(fuelAnimation.isAnimationFinished(fuelPercentage)){
-			DontCrash.endGame();
-		}
+	
+	public void reset(){
+		this.x = (Gdx.graphics.getWidth()/2-(.1f*Gdx.graphics.getWidth())-2500);
+		this.y = this.image.getHeight()/2;
+		this.image.setCenter(this.x, this.y);
 	}
+	
+	
 }

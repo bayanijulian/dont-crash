@@ -11,6 +11,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.hyeptrainstudios.dontcrash.screens.GameScreen;
 import com.hypetrainstudios.dontcrash.handlers.AssetHandler;
 import com.hypetrainstudios.dontcrash.handlers.ChunkHandler;
+import com.hypetrainstudios.dontcrash.ui.GameUI;
 import com.hypetrainstudios.dontcrash.entities.Fuel;
 import com.hypetrainstudios.dontcrash.entities.FuelMeter;
 import com.hypetrainstudios.dontcrash.entities.Projectile;
@@ -28,6 +29,7 @@ public class DontCrash extends Game {
 	public static SpaceShip spaceShip;
 	public static boolean running;
 	public static FuelMeter fuelMeter;
+	public static float gameTime;
 	@Override
 	public void create() {
 		//loads assets to a queue
@@ -40,6 +42,8 @@ public class DontCrash extends Game {
 		init();
 		//sets screen to the main menu
 		setScreen(gameScreen);
+		
+		gameTime = 0;
 	}
 	
 	public static void init(){
@@ -54,6 +58,7 @@ public class DontCrash extends Game {
 		spaceShip = new SpaceShip();
 		fuelMeter = new FuelMeter();
 		ChunkHandler.init();
+		GameUI.init();
 	}
 	public static void createSpaceRock(float x, float y){
 		spaceRocks.add(new SpaceRock(x, y));
@@ -65,15 +70,21 @@ public class DontCrash extends Game {
 		fuel.add(new Fuel(x, y));
 	}
 	public static void endGame(){
-		System.exit(0);
+		running = false;
 	}
 	public static void reset(){
 		spaceRocks.clear();
 		fuel.clear();
 		projectiles.clear();
+		
+		running = true;
+		
 		ChunkHandler.init();
-		spaceShip = new SpaceShip();
-		fuelMeter = new FuelMeter();
+		
+		spaceShip.reset();
+		fuelMeter.reset();
+		
+		//GameScreen.time = 0;
 		
 	}
 }
