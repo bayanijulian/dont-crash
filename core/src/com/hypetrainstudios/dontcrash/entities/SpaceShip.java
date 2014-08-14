@@ -55,7 +55,7 @@ public class SpaceShip extends Entity implements InputProcessor{
 		this.distanceTraveled = 0;
 		
 		this.maxSpeed = 1700f;
-		this.speed = 500f;
+		this.speed = 800f;
 		this.x = -2500;
 		this.y = centerPosition;
 		this.active = true;

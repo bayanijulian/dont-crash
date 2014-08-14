@@ -39,9 +39,10 @@ public class GameUI {
 	
 	private static DecimalFormat df;
 	
-	public static void init(){
+	public static void setup(){
 		view = new FitViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 		stage = new Stage(view,DontCrash.batch);
+		
 		listener = new Listener();
 		df = new DecimalFormat("00");
 		
@@ -52,10 +53,7 @@ public class GameUI {
 		createButtons();
 		addActors();
 	}
-	
-	
-	
-	public static void createButtons(){
+	private static void createButtons(){
 		/*		Styles		*/
 		pauseBtnStyle = new ButtonStyle(
 				new TextureRegionDrawable(AssetHandler.manager.get(AssetHandler.atlasImages).findRegion("pauseBtnNormal")), //UP
@@ -70,20 +68,22 @@ public class GameUI {
 		
 		/*		Listeners		*/
 		pauseBtn.addListener(listener);
-		
 	}
-	public static void createImages(){
+	
+	
+
+	private static void createImages(){
 		fuelMeterImg = new Image(AssetHandler.manager.get(AssetHandler.atlasFuelMeter).findRegion("fuelmeter"));
 		fuelMeterImg.setCenterPosition((Gdx.graphics.getWidth()/2f), fuelMeterImg.getHeight()/2);
 		fuelMeterImg.setScaleY(.5f);
 	}
-	public static void createAnimations(){
+	private static void createAnimations(){
 		fuelMeterAnimation = new Animation(1/30f, AssetHandler.manager.get(AssetHandler.atlasFuelMeter).findRegions("fuelmeter"));
 	}
-	public static void createFonts(){
+	private static void createFonts(){
 		audiowideFont = AssetHandler.manager.get(AssetHandler.audiowideFont);
 	}
-	public static void createLabels(){
+	private static void createLabels(){
 		/*	Styles	*/
 		mainLblStyle = new LabelStyle(audiowideFont,Color.BLACK);
 		
@@ -91,7 +91,7 @@ public class GameUI {
 		timeLbl = new Label("Time", mainLblStyle);
 		timeLbl.setPosition(0, 0);
 	}
-	public static void addActors(){
+	private static void addActors(){
 		stage.addActor(fuelMeterImg);
 		stage.addActor(pauseBtn);
 		stage.addActor(timeLbl);

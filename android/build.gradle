@@ -63,7 +63,7 @@ task run(type: Exec) {
     }
 
     def adb = path + "/platform-tools/adb"
-    commandLine "$adb", 'shell', 'am', 'start', '-n', 'com.hypetrainstudios.dontcrash.android/com.hypetrainstudios.dontcrash.android.AndroidLauncher'
+    commandLine "$adb", 'shell', 'am', 'start', '-n', 'com.hypetainstudios.dontcrash.android/com.hypetainstudios.dontcrash.android.AndroidLauncher'
 }
 
 // sets up the Android Eclipse project, using the old Ant based build.

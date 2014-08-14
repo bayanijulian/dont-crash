@@ -51,13 +51,14 @@ public class DontCrash extends Game {
 		cam.update();
 		batch = new SpriteBatch();
 		batch.setProjectionMatrix(cam.combined);
+		batch.enableBlending();
 		spaceRocks = new ArrayList<SpaceRock>();
 		fuel = new ArrayList<Fuel>();
 		projectiles = new ArrayList<Projectile>();
 		spaceShip = new SpaceShip();
 		
 		ChunkHandler.init();
-		GameUI.init();
+		GameUI.setup();
 	}
 	public static void createSpaceRock(float x, float y){
 		spaceRocks.add(new SpaceRock(x, y));
