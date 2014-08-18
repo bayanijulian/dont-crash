@@ -1,4 +1,4 @@
-package com.hyeptrainstudios.dontcrash.screens;
+package com.hypetrainstudios.dontcrash.screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputMultiplexer;
